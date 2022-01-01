@@ -7,3 +7,9 @@
 **.pem file permission set:**
 
     chmod 400 file.pem
+
+**Installing rvm in ubuntu**
+
+    $ \curl -sSL https://get.rvm.io | bash
+    $ source /home/<user>/.rvm/scripts/rvm
+    $ rvm -v
