@@ -1,0 +1,30 @@
+curl https://binaries.cockroachdb.com/cockroach-v22.1.6.linux-amd64.tgz | tar -xz && sudo cp -i cockroach-v22.1.6.linux-amd64/cockroach /usr/local/bin/
+
+echo "export PATH=$PATH:/opt/cockroach-v22.1.6.linux-amd64" >>~/.bash_profile
+
+cockroach start \
+--insecure \
+--store=node1 \
+--listen-addr=172.22.254.24:26257 \
+--http-addr=172.22.254.24:8080 \
+--join=172.22.254.24:26257,172.22.254.24:26258,172.22.254.24:26259 \
+--background
+
+cockroach start \
+--insecure \
+--store=node2 \
+--listen-addr=172.22.254.24:26258 \
+--http-addr=172.22.254.24:8080 \
+--join=172.22.254.24:26257,172.22.254.24:26258,172.22.254.24:26259 \
+--background
+
+cockroach start \
+--insecure \
+--store=node3 \
+--listen-addr=172.22.254.24:26259 \
+--http-addr=172.22.254.24:8082 \
+--join=172.22.254.24:26257,172.22.254.24:26258,172.22.254.24:26259 \
+--background
+
+cockroach init --insecure --host=172.22.254.24:26257
+cockroach sql --host=172.22.254.24 --insecure
