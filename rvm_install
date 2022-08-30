@@ -1,0 +1,5 @@
+**Installing rvm in ubuntu**
+
+    $ \curl -sSL https://get.rvm.io | bash
+    $ source /home/<user>/.rvm/scripts/rvm
+    $ rvm -v

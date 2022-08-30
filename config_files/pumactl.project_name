@@ -1,0 +1,23 @@
+PID=`ps -eaf | grep project_name_puma.sock | grep -v grep | awk '{print $2}'`
+echo $PID
+if [[ "" !=  "$PID" ]]
+then
+ echo "Killing puma process pid: $PID"
+ kill -9 $PID
+ cd /home/ubuntu/apps/project_name/current/
+ # pwd
+ # which bundle
+ # export RVM_ROOT=/home/ubuntu/.rvm/scripts/rvm
+ bash -l -c "rvm use 2.7.1"
+ bash -l -c "bundle exec puma -C /home/ubuntu/apps/project_name/shared/puma.rb --daemon"
+ #~/.rvm/bin/rvm 2.7.1 do bundle exec puma -C /home/ubuntu/apps/ekyc-backend/shared/puma.rb --daemon
+else
+ cd /home/ubuntu/apps/project_name/current/
+ bash -l -c "rvm use 2.7.1"
+ bash -l -c "bundle exec puma -C /home/ubuntu/apps/project_name/shared/puma.rb --daemon"
+ # pwd
+ # which bundle
+ # bash -l -c "rvm use 2.6.3"
+ # bash -l -c "rvm default do bundle exec puma -C /home/ubuntu/apps/ekyc-backend/shared/puma.rb --daemon"
+fi
+
