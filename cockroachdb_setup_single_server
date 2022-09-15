@@ -28,3 +28,6 @@ cockroach start \
 
 cockroach init --insecure --host=172.22.254.24:26257
 cockroach sql --host=172.22.254.24 --insecure
+
+
+Benchmarking: https://www.cockroachlabs.com/docs/v22.1/performance-benchmarking-with-tpcc-local
