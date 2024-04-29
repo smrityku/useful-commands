@@ -1,0 +1,22 @@
+commands:
+sudo nano /etc/systemd/system/app-puma.service
+sudo systemctl daemon-reload
+sudo systemctl enable app-puma
+sudo systemctl restart app-puma.service 
+
+content:
+[Unit]
+Description=Puma Rails Server
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/apps/tam_reporting_panel_staging/current
+ExecStart=/home/ubuntu/.rvm/bin/rvm default do bundle exec puma -C /home/ubuntu/apps/tam_reporting_panel_staging/shared/config/puma.rb
+ExecStop=/home/ubuntu/.rvm/bin/rvm default do bundle exec pumactl -S /home/ubuntu/apps/tam_reporting_panel_staging/shared/tmp/pids/puma.state stop
+TimeoutSec=15
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
